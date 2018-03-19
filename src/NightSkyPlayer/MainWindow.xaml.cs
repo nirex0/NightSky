@@ -15,9 +15,9 @@ namespace NightSkyPlayer
     {
         #region Properties
 
-        private NDC.NDynamics.Core.AsyncWorker ProgressWorker = new NDC.NDynamics.Core.AsyncWorker();
-        private NDC.NDynamics.Core.AsyncWorker OpacityWorker = new NDC.NDynamics.Core.AsyncWorker();
-        private NDC.NDynamics.Core.AsyncWorker MinimizeWorker = new NDC.NDynamics.Core.AsyncWorker();
+        private NDC.NDynamics.Core.AsyncWorker ProgressWorker = new NDC.NDynamics.Core.AsyncWorker(10);
+        private NDC.NDynamics.Core.AsyncWorker OpacityWorker = new NDC.NDynamics.Core.AsyncWorker(10);
+        private NDC.NDynamics.Core.AsyncWorker MinimizeWorker = new NDC.NDynamics.Core.AsyncWorker(1);
         private NDC.NDynamics.Core.AsyncWorker BackgroundTimer = new NDC.NDynamics.Core.AsyncWorker(1);
 
 
@@ -140,8 +140,6 @@ namespace NightSkyPlayer
             MouseDown += MainWindow_DragMove;
             MouseUp += MainWindow_MouseUp;
 
-
-
             // Buttons
             btn_add.Click += Btn_add_Click;
             btn_close.Click += Btn_close_Click;
@@ -162,6 +160,7 @@ namespace NightSkyPlayer
             ProgressWorker.RunAsyncWorker(null);
 
             MinimizeWorker.WorkerInterval += MinimizeWorker_WorkerInterval;
+            MinimizeWorker.RunAsyncWorker(null);
         }
         #endregion
         #region Helper Functions
