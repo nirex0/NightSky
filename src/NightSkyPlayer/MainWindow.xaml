@@ -1,0 +1,101 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NightSkyPlayer"
+        xmlns:Legacy="clr-namespace:NDC.NStyle.Legacy;assembly=NDC" xmlns:Controls="clr-namespace:NDC.NStyle.Controls;assembly=NDC" x:Class="NightSkyPlayer.MainWindow"
+        mc:Ignorable="d"
+        Title="Night Sky" AllowDrop="True" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Height="720" Width="1280" Background="{x:Null}" Icon="Resources/res-icon.ico">
+    <Grid>
+
+
+        <MediaElement LoadedBehavior="Manual" x:Name="me_backgr" HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="1280" Source="Dynamic/Blue-Abstract-Waves-Live-Wallpaper.mp4" Volume="0" UnloadedBehavior="Play" Stretch="UniformToFill"/>
+
+
+        <Controls:NSListBox x:Name="lb_playlists" HorizontalAlignment="Left" Height="275" Margin="10,430,0,0" VerticalAlignment="Top" Width="343" Foreground="Black">
+            <Controls:NSListBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#B2000000" Offset="1"/>
+                    <GradientStop Color="#B2031B3C"/>
+                </LinearGradientBrush>
+            </Controls:NSListBox.Background>
+        </Controls:NSListBox>
+
+        <Controls:NSRoundButton x:Name="btn_close" HorizontalAlignment="Left" Margin="1225,10,0,0" VerticalAlignment="Top" Width="45" Height="45" Content="" Background="#FF145278">
+            <Controls:NSRoundButton.OpacityMask>
+                <ImageBrush ImageSource="Resources/res-exit.png"/>
+            </Controls:NSRoundButton.OpacityMask>
+        </Controls:NSRoundButton>
+        <Controls:NSRoundButton x:Name="btn_minimize" HorizontalAlignment="Left" Margin="1175,10,0,0" VerticalAlignment="Top" Width="45" Height="45" Content="" Background="#FF145278" BorderBrush="Red">
+            <Controls:NSRoundButton.OpacityMask>
+                <ImageBrush ImageSource="Resources/res-minimize.png"/>
+            </Controls:NSRoundButton.OpacityMask>
+        </Controls:NSRoundButton>
+
+        <Controls:NSLabel x:Name="lbl_playlist" HorizontalContentAlignment="Center" Content="Playlists" HorizontalAlignment="Left" Margin="10,398,0,0" VerticalAlignment="Top" Width="343" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="16">
+            <Controls:NSLabel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#4C000000"/>
+                    <GradientStop Color="#B2031B3C" Offset="1"/>
+                </LinearGradientBrush>
+            </Controls:NSLabel.Background>
+        </Controls:NSLabel>
+        <Controls:NSLabel x:Name="lbl_tracks" HorizontalContentAlignment="Center" Content="Tracks" HorizontalAlignment="Left" Margin="927,398,0,0" VerticalAlignment="Top" Width="343" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="16">
+            <Controls:NSLabel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#4C000000" Offset="0"/>
+                    <GradientStop Color="#B2031B3C" Offset="1"/>
+                </LinearGradientBrush>
+            </Controls:NSLabel.Background>
+        </Controls:NSLabel>
+
+        <Image x:Name="img_songImg" HorizontalAlignment="Left" Height="160" Margin="762,541,0,0" VerticalAlignment="Top" Width="160" Stretch="UniformToFill"/>
+
+        <Controls:NSProgressBar x:Name="prgbar_progress" HorizontalAlignment="Left" Height="10" Margin="-6,710,-7,0" VerticalAlignment="Top" Width="1293" BorderBrush="Black" Background="#FF145278" Value="1000"/>
+
+        <Controls:NSRoundButton x:Name="btn_play" Margin="617,659,617,0" VerticalAlignment="Top" Width="46" Height="46" Content="&#xA;" Background="#FF145278">
+            <Controls:NSRoundButton.OpacityMask>
+                <ImageBrush ImageSource="Resources/res-pause.png"/>
+            </Controls:NSRoundButton.OpacityMask>
+        </Controls:NSRoundButton>
+        <Controls:NSRoundButton x:Name="btn_next" HorizontalAlignment="Left" Margin="669,659,0,0" VerticalAlignment="Top" Width="46" Height="46" Content="&#xA;" Background="#FF145278">
+            <Controls:NSRoundButton.OpacityMask>
+                <ImageBrush ImageSource="Resources/res-next.png"/>
+            </Controls:NSRoundButton.OpacityMask>
+        </Controls:NSRoundButton>
+        <Controls:NSRoundButton x:Name="btn_prev" HorizontalAlignment="Left" Margin="565,659,0,0" VerticalAlignment="Top" Width="46" Height="46" Content="&#xA;" Background="#FF145278">
+            <Controls:NSRoundButton.OpacityMask>
+                <ImageBrush ImageSource="Resources/res-prev.png"/>
+            </Controls:NSRoundButton.OpacityMask>
+        </Controls:NSRoundButton>
+        <Controls:NSLabel x:Name="lbl_track_title" HorizontalContentAlignment="Left" Content="Title: We don't sleep with our eyes closed" HorizontalAlignment="Left" Margin="358,398,0,0" VerticalAlignment="Top" Width="564" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="16" Height="28" Foreground="#FF8BCEF9"/>
+        <Controls:NSLabel x:Name="lbl_track_artist" HorizontalContentAlignment="Left" Content="Artist: What Kills" HorizontalAlignment="Left" Margin="358,431,0,0" VerticalAlignment="Top" Width="564" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="16" Height="29" Foreground="#FF009BFF" Background="{x:Null}"/>
+        <Controls:NSLabel x:Name="lbl_track_album" HorizontalContentAlignment="Left" Content="Album: Listen when Sad 5" HorizontalAlignment="Left" Margin="358,464,0,0" VerticalAlignment="Top" Width="564" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="16" Height="29" Foreground="#FF145278"/>
+        <Controls:NSLabel x:Name="lbl_track_year" HorizontalContentAlignment="Left" Content="Year: 2017" HorizontalAlignment="Left" Margin="358,498,0,0" VerticalAlignment="Top" Width="564" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="16" Height="28" Foreground="#FF145278"/>
+        <Controls:NSLabel x:Name="lbl_track_no" HorizontalContentAlignment="Left" Content="Track Number: 1" HorizontalAlignment="Left" Margin="358,531,0,0" VerticalAlignment="Top" Width="564" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="16" Height="28" Foreground="#FF145278"/>
+
+        <Controls:NSLabel x:Name="lbl_const_name" HorizontalContentAlignment="Left" Content="Night Sky" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="114" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="28" Height="45" Foreground="#FF57819C" FontStyle="Italic" FontFamily="Goudy Old Style"/>
+        <Controls:NSRoundButton x:Name="btn_add" HorizontalAlignment="Left" Margin="338,691,0,0" VerticalAlignment="Top" Width="10" Height="10" Content="&#xA;" Background="#FF145278">
+            <Controls:NSRoundButton.OpacityMask>
+                <ImageBrush ImageSource="Resources/res-add.png"/>
+            </Controls:NSRoundButton.OpacityMask>
+        </Controls:NSRoundButton>
+        <Controls:NSListBox x:Name="lb_tracks" HorizontalAlignment="Left" Height="275" Margin="927,430,0,0" VerticalAlignment="Top" Width="343" Foreground="Black">
+            <Controls:NSListBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#B2031B3C"/>
+                    <GradientStop Color="#B2000000" Offset="1"/>
+                </LinearGradientBrush>
+            </Controls:NSListBox.Background>
+        </Controls:NSListBox>
+        <MediaElement x:Name="me_player" HorizontalAlignment="Left" Height="100" Margin="1285,0,-105,0" VerticalAlignment="Top" Width="100"/>
+        <Controls:NSRoundButton x:Name="btn_pause" Margin="617,659,617,0" VerticalAlignment="Top" Width="46" Height="46" Content="&#xA;" Background="#FF145278">
+            <Controls:NSRoundButton.OpacityMask>
+                <ImageBrush ImageSource="Resources/res-play.png"/>
+            </Controls:NSRoundButton.OpacityMask>
+        </Controls:NSRoundButton>
+        <Controls:NSLabel x:Name="lbl_playlist_name_cur" HorizontalContentAlignment="center" Content="Playlist" Margin="10,147,10,0" VerticalAlignment="Top" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="28" Height="45" Foreground="#FF57819C" FontStyle="Italic" FontFamily="Goudy Old Style"/>
+
+    </Grid>
+</Window>

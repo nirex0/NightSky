@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NightSkyPlayer", "NightSkyPlayer\NightSkyPlayer.csproj", "{CA7408CE-CD0C-42C8-BC1E-4B38B4BC827C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDC", "NDC\NDC.csproj", "{3088DAC9-E8B2-4E1D-9072-680F47707094}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA7408CE-CD0C-42C8-BC1E-4B38B4BC827C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA7408CE-CD0C-42C8-BC1E-4B38B4BC827C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA7408CE-CD0C-42C8-BC1E-4B38B4BC827C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA7408CE-CD0C-42C8-BC1E-4B38B4BC827C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3088DAC9-E8B2-4E1D-9072-680F47707094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3088DAC9-E8B2-4E1D-9072-680F47707094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3088DAC9-E8B2-4E1D-9072-680F47707094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3088DAC9-E8B2-4E1D-9072-680F47707094}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D30722E4-6E1C-4039-9038-DDA0906B2FE8}
+	EndGlobalSection
+EndGlobal

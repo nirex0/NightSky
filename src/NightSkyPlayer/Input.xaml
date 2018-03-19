@@ -1,0 +1,16 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NightSkyPlayer"
+        xmlns:Controls="clr-namespace:NDC.NStyle.Controls;assembly=NDC" xmlns:Legacy="clr-namespace:NDC.NStyle.Legacy;assembly=NDC" x:Class="NightSkyPlayer.Input"
+        mc:Ignorable="d"
+        Title="Input" Topmost="True" AllowsTransparency="True" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" Height="150" Width="450" ShowInTaskbar="False" Background="{x:Null}">
+    <Grid>
+        <Controls:NSTextBox x:Name="tb_name" HorizontalAlignment="Left" Height="55" Margin="10,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="430" FontSize="28"/>
+        <Controls:NSLabel  x:Name="lbl_const_name" HorizontalContentAlignment="Center" Content="Input" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="430" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="28" Height="45" Foreground="#FF57819C" FontStyle="Italic" FontFamily="Goudy Old Style"/>
+        <Controls:NSLabel  x:Name="lbl_name_ph" VerticalContentAlignment="Center" Content="Name..." HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Height="55" FontSize="28"/>
+
+    </Grid>
+</Window>
