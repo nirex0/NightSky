@@ -142,5 +142,11 @@
   <ItemGroup>
     <Resource Include="Image1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\res-repeat.png" />
+    <Resource Include="Resources\res-shuffle.png" />
+    <Resource Include="Resources\res-voldown.png" />
+    <Resource Include="Resources\res-volup.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
