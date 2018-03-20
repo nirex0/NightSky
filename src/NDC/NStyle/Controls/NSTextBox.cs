@@ -173,7 +173,7 @@ namespace NDC.NStyle.Controls
             {
                  NDC.NStyle.Transition.Smooth.TextBox.Foreground(this, Container.Colors.MAIN, 250);
                  NDC.NStyle.Transition.Smooth.TextBox.BorderBrush(this, Container.Colors.MAIN, 250);
-                 NDC.NStyle.Transition.Smooth.TextBox.Background(this, Container.Colors.NIGHTSKY_TRANSP, 250);
+                 NDC.NStyle.Transition.Smooth.TextBox.Background(this, Container.Colors.BLUE_NIGHTSKY_TRANSP, 250);
                  NDC.NStyle.Transition.Smooth.TextBox.SelectionBrush(this, Container.Colors.MAIN, 250);
             }
         }
