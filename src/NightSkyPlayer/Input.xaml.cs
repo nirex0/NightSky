@@ -71,7 +71,7 @@ namespace NightSkyPlayer
                 Opacity += 0.04;
             if (Opacity <= 0)
             {
-                holder.canTakeInput = true;
+                holder.CanTakeInput = true;
                 Close();
             }
 

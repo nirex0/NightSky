@@ -104,7 +104,7 @@
                 <ImageBrush ImageSource="Resources/res-play.png" Stretch="Uniform"/>
             </Controls:NSRoundButton.OpacityMask>
         </Controls:NSRoundButton>
-        <Controls:NSLabel x:Name="lbl_playlist_name_cur" HorizontalContentAlignment="center" Content="Playlist" Margin="10,147,10,0" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="28" Foreground="#FF57819C" FontStyle="Italic" FontFamily="Goudy Old Style" Grid.ColumnSpan="5" Height="45" VerticalAlignment="Top"/>
+        <Controls:NSLabel x:Name="lbl_playlist_name_cur" HorizontalContentAlignment="center" Content="Default" Margin="10,147,10,0" BorderBrush="#FF17BF76" FontWeight="Bold" FontSize="28" Foreground="#FF57819C" FontStyle="Italic" FontFamily="Goudy Old Style" Grid.ColumnSpan="5" Height="45" VerticalAlignment="Top"/>
         <Controls:NSRoundButton x:Name="btn_shuffle" Margin="0,0,0,34" Width="46" Height="46" Content="&#xA;" Background="#FF145278" Grid.Column="3" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Controls:NSRoundButton.OpacityMask>
                 <ImageBrush ImageSource="Resources/res-shuffle.png" Stretch="Uniform"/>
