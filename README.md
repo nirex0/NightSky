@@ -27,7 +27,7 @@ CHANGELOG
 
 -Next and Previous buttons now work properly.
 
--The play will loop over when the playlist is over.
+-The player will loop over when the playlist is over.
 
 -Volume up and Volume down buttons now work with smooth animation.
 
