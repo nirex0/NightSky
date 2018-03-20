@@ -10,9 +10,8 @@ I've customized NDC a little to suit my needs in creating this player, so it sim
 DEMO
 ====
 
-A demo of the player can be found here:
+A demo of the player can be found here: https://youtu.be/MgJyU03_2bU
 
-https://youtu.be/uJDEfR8xaK0
 
 CHANGELOG
 =========
