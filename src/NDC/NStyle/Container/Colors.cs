@@ -94,16 +94,48 @@ namespace NDC.NStyle.Container
 
 
         // NIGHTSKY SPECIFIC THEME
-        public static void NightSky()
+        public static void BLUE_NightSky()
         {
-            Update(NIGHTSKY_NORMAL, NIGHTSKY_GLOW, NIGHTSKY_DISABLED, NIGHTSKY_DARK, LIGHT_GREEN_ALT_DARK);
+            Update(BLUE_NIGHTSKY_NORMAL, BLUE_NIGHTSKY_GLOW, BLUE_NIGHTSKY_DISABLED, BLUE_NIGHTSKY_DARK, LIGHT_GREEN_ALT_DARK);
+            NIGHTSKY_CONST = BLUE_NIGHTSKY_GLOW;
+        }
+        public static void PURPLEISH_NightSky()
+        {
+            Update(PURPLEISH_NIGHTSKY_NORMAL, PURPLEISH_NIGHTSKY_GLOW, PURPLEISH_NIGHTSKY_DISABLED, PURPLEISH_NIGHTSKY_DARK, LIGHT_GREEN_ALT_DARK);
+            NIGHTSKY_CONST = PURPLEISH_NIGHTSKY_GLOW;
         }
 
-        public static Color NIGHTSKY_GLOW = Color.FromRgb(0x8B, 0xCE, 0xF9);
-        public static Color NIGHTSKY_NORMAL = Color.FromRgb(0x00, 0x9B, 0xFF);
-        public static Color NIGHTSKY_DISABLED = Color.FromRgb(0x36, 0x36, 0x36);
-        public static Color NIGHTSKY_DARK = Color.FromArgb(0, 0x02, 0x03, 0x05);
-        public static Color NIGHTSKY_TRANSP = Color.FromArgb(128, 0x02, 0x03, 0x05);
+        public static void ORANGE_NightSky()
+        {
+            Update(ORANGE_NIGHTSKY_NORMAL, ORANGE_NIGHTSKY_GLOW, ORANGE_NIGHTSKY_DISABLED, ORANGE_NIGHTSKY_DARK, LIGHT_GREEN_ALT_DARK);
+            NIGHTSKY_CONST = ORANGE_NIGHTSKY_GLOW;
+        }
+
+        public static Color NIGHTSKY_CONST;
+
+        //BLUE 
+        public static Color BLUE_NIGHTSKY_GLOW = Color.FromRgb(0x8B, 0xCE, 0xF9);
+        public static Color BLUE_NIGHTSKY_NORMAL = Color.FromRgb(0x00, 0x9B, 0xFF);
+        public static Color BLUE_NIGHTSKY_DISABLED = Color.FromRgb(0x36, 0x36, 0x36);
+        public static Color BLUE_NIGHTSKY_DARK = Color.FromArgb(0, 0x02, 0x03, 0x05);
+        public static Color BLUE_NIGHTSKY_TRANSP = Color.FromArgb(128, 0x02, 0x03, 0x05);
+
+        //PURPLE-ISH
+        public static Color PURPLEISH_NIGHTSKY_GLOW = Color.FromRgb(0xFF, 0x64, 0x41);
+        public static Color PURPLEISH_NIGHTSKY_NORMAL = Color.FromRgb(0x8C, 0x72, 0xFF);
+        public static Color PURPLEISH_NIGHTSKY_DISABLED = Color.FromRgb(0x36, 0x36, 0x36);
+        public static Color PURPLEISH_NIGHTSKY_DARK = Color.FromArgb(0, 0x02, 0x03, 0x05);
+        public static Color PURPLEISH_NIGHTSKY_TRANSP = Color.FromArgb(128, 0x02, 0x03, 0x05);
+
+        //ORANGE
+        public static Color ORANGE_NIGHTSKY_NORMAL = Color.FromRgb(0xF1, 0xED, 0xFF);
+        public static Color ORANGE_NIGHTSKY_GLOW = Color.FromRgb(0x8C, 0x72, 0xFF);
+
+        public static Color ORANGE_NIGHTSKY_DISABLED = Color.FromRgb(0x36, 0x36, 0x36);
+        public static Color ORANGE_NIGHTSKY_DARK = Color.FromArgb(0, 0x02, 0x03, 0x05);
+        public static Color ORANGE_NIGHTSKY_TRANSP = Color.FromArgb(128, 0x02, 0x03, 0x05);
+        
+
         // NORMAL NDC COLORS
 
         public static Color BLUE_GLOW = Color.FromRgb(0xFF, 0x00, 0x00);
