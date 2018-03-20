@@ -17,16 +17,12 @@ namespace NightSkyPlayer
 
         private NDC.NDynamics.Core.AsyncWorker ProgressWorker = new NDC.NDynamics.Core.AsyncWorker(10);
         private NDC.NDynamics.Core.AsyncWorker OpacityWorker = new NDC.NDynamics.Core.AsyncWorker(10);
-        private NDC.NDynamics.Core.AsyncWorker MinimizeWorker = new NDC.NDynamics.Core.AsyncWorker(1);
         private NDC.NDynamics.Core.AsyncWorker BackgroundTimer = new NDC.NDynamics.Core.AsyncWorker(1);
         private NDC.NDynamics.Core.AsyncWorker VolumeTimer = new NDC.NDynamics.Core.AsyncWorker(10);
-        private NDC.NDynamics.Core.AsyncWorker ResizeWorker = new NDC.NDynamics.Core.AsyncWorker(10);
 
         public bool canTakeInput { get; set; } = true;
-        private bool isResizing = false;
-        private bool isClosing = false;
         private bool isPlaying = false;
-        private bool isMinimizing = false;
+
         private bool isDragMoveEnabled = false;
         private bool shouldRepeat = false;
         private bool shouldShuffle = false;
@@ -35,6 +31,16 @@ namespace NightSkyPlayer
         private bool autoPlay = false;
         private bool fullScreen = false;
         private int volumeAccum = 0;
+
+        /// 0 = add 
+        /// 1 = sub
+        private int opacityMod = 0;
+        /// 0 = resize
+        /// 1 = minimize
+        /// 2 = close
+        /// 3 = nothing
+        /// 4 = first show
+        private int opacityCmd = 4;
 
         private WindowState nextState;
 
@@ -58,8 +64,6 @@ namespace NightSkyPlayer
             }
 
             Opacity = 0;
-            OpacityWorker.WorkerInterval += OpacityWorker_WorkerInterval;
-            OpacityWorker.RunAsyncWorker(null);
 
             lbl_track_artist.Content = string.Empty;
             lbl_track_title.Content = string.Empty;
@@ -189,17 +193,14 @@ namespace NightSkyPlayer
             ProgressWorker.WorkerInterval += ProgressWorker_WorkerInterval;
             ProgressWorker.RunAsyncWorker(null);
 
-            MinimizeWorker.WorkerInterval += MinimizeWorker_WorkerInterval;
-            MinimizeWorker.RunAsyncWorker(null);
-
             VolumeTimer.WorkerInterval += VolumeTimer_WorkerInterval;
             VolumeTimer.RunAsyncWorker(null);
 
-            ResizeWorker.WorkerInterval += ResizeWorker_WorkerInterval;
-            ResizeWorker.RunAsyncWorker(null);
+            OpacityWorker.WorkerInterval += OpacityWorker_WorkerInterval;
+            OpacityWorker.RunAsyncWorker(null);
 
             // Window
-            MouseDoubleClick += MainWindow_MouseDoubleClick;
+            MouseDoubleClick += MainWindow_Maximizer;
             MouseDown += MainWindow_DragMove;
             MouseUp += MainWindow_MouseUp;
         }    
@@ -440,70 +441,43 @@ namespace NightSkyPlayer
                 me_backgr.Play();
             }
         }
-        private void MinimizeWorker_WorkerInterval(object sender, NDC.NDynamics.Arguments.AsyncWorkerArgs e)
+        private void OpacityWorker_WorkerInterval(object sender, NDC.NDynamics.Arguments.AsyncWorkerArgs e)
         {
-            if (isMinimizing)
+            if (opacityMod == 0 && opacityCmd != 3)
             {
-                ResizeWorker.StopAsyncWorker();
-                OpacityWorker.StopAsyncWorker();
+                Opacity += 0.02;
+                if (Opacity >= 1)
+                {
+                    Opacity = 1;
+                    opacityCmd = 3;
+                }
+            }
+            else if (opacityMod == 1 && opacityCmd != 3)
+            {
                 Opacity -= 0.02;
                 if (Opacity <= 0)
                 {
-                    WindowState = WindowState.Minimized;
-                    isMinimizing = false;
-                    Opacity = 1;
-                    ResizeWorker.RunAsyncWorker(null);
-                    OpacityWorker.RunAsyncWorker(null);
-                }
-            }
-        }
-        private void OpacityWorker_WorkerInterval(object sender, NDC.NDynamics.Arguments.AsyncWorkerArgs e)
-        {
-            if (isClosing)
-            {
-                ResizeWorker.StopAsyncWorker();
-                Opacity -= 0.02;
-                if (Opacity < 0)
-                {
+                    // Resize
+                    if (opacityCmd == 0)
+                    {
+                        WindowState = nextState;
+                        opacityMod = 0;
+                    }
+                    // Minimize
+                    else if (opacityCmd == 1)
+                    {
+                        WindowState = WindowState.Minimized;
+                        opacityMod = 0;
+                    }
+                    // Exit
+                    else if (opacityCmd == 2)
+                    {
+                        Application.Current.Shutdown();
+                    }
                     Opacity = 0;
                 }
             }
-            else
-            {
-                Opacity += 0.02;
-                if (Opacity > 1)
-                {
-                    Opacity = 1;
-                }
-            }
-            if (Opacity <= 0)
-            {
-                Close();
-            }
-        }
-        private void ResizeWorker_WorkerInterval(object sender, NDC.NDynamics.Arguments.AsyncWorkerArgs e)
-        {
-            if (isResizing)
-            {
-                OpacityWorker.StopAsyncWorker();
-                Opacity -= 0.02f;
-                if (Opacity < 0)
-                {
-                    Opacity = 0;
-                    isResizing = false;
-                    WindowState = nextState;
-                }
-            }
-            else if (!isResizing)
-            {
-                Opacity += 0.02f;
-                if (Opacity > 1)
-                {
-                    OpacityWorker.RunAsyncWorker(null);
-                    Opacity = 1;
-                }
-            }
-        }
+        } 
         private void ProgressWorker_WorkerInterval(object sender, NDC.NDynamics.Arguments.AsyncWorkerArgs e)
         {
             if (gisMouseOnProg)
@@ -517,22 +491,28 @@ namespace NightSkyPlayer
         }
         #endregion
         #region Window Events
-        private void MainWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void MainWindow_Maximizer(object sender, MouseButtonEventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
+            double y = Mouse.GetPosition(Application.Current.MainWindow).Y;
+            if (y < 50)
             {
-                isResizing = true;
-                nextState = WindowState.Normal;
-            }
-            else
-            {
-                isResizing = true;
-                nextState = WindowState.Maximized;
+                if (WindowState == WindowState.Maximized)
+                {
+                    opacityCmd = 0;
+                    opacityMod = 1;
+                    nextState = WindowState.Normal;
+                }
+                else
+                {
+                    opacityCmd = 0;
+                    opacityMod = 1;
+                    nextState = WindowState.Maximized;
+                }
             }
         }
         private void MainWindow_DragMove(object sender, MouseButtonEventArgs e)
         {
-            double y = Mouse.GetPosition(Application.Current.MainWindow).Y;      
+            double y = Mouse.GetPosition(Application.Current.MainWindow).Y;
             try
             {
                 if ((e.ChangedButton == MouseButton.Left) && (y < 30) && (isDragMoveEnabled == true))
@@ -707,11 +687,14 @@ namespace NightSkyPlayer
         }
         private void Btn_minimize_Click(object sender, RoutedEventArgs e)
         {
-            isMinimizing = true;
+            opacityCmd = 1;
+            opacityMod = 1;
         }
         private void Btn_close_Click(object sender, RoutedEventArgs e)
         {
-            isClosing = true;
+            opacityCmd = 2;
+            opacityMod = 1;
+
         }
         private void Btn_repeat_Click(object sender, RoutedEventArgs e)
         {
