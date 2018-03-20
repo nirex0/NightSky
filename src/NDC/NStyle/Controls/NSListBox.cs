@@ -31,8 +31,6 @@ namespace NDC.NStyle.Controls
 {
     public class NSListBox : ListBox
     {
-        private NDC.NDynamics.Core.Lerp BRHOV;
-        private NDC.NDynamics.Core.Lerp BRUNH;
         public bool Override { get; set; } = false;
         public NSListBox()
         {

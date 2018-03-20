@@ -34,6 +34,7 @@ namespace NDC.NStyle.Controls
         private NDC.NDynamics.Core.Lerp BRHOV;
         private NDC.NDynamics.Core.Lerp BRUNH;
 
+        public bool isActive { get; set; } = false;
         public bool isPlayerSpecific { get; set; } = false;
         private bool isFocused;
         public bool Override { get; set; } = false;
@@ -125,9 +126,18 @@ namespace NDC.NStyle.Controls
                 BOR_HOVER();
                 if (isPlayerSpecific)
                 {
-                    NDC.NStyle.Transition.Smooth.Button.Foreground(this, Container.Colors.GLOW, 250);
-                    NDC.NStyle.Transition.Smooth.Button.BorderBrush(this, Container.Colors.GLOW, 250);
-                    NDC.NStyle.Transition.Smooth.Button.Background(this, Container.Colors.GLOW, 250);
+                    if (!isActive)
+                    {
+                        NDC.NStyle.Transition.Smooth.Button.Foreground(this, Container.Colors.GLOW, 250);
+                        NDC.NStyle.Transition.Smooth.Button.BorderBrush(this, Container.Colors.GLOW, 250);
+                        NDC.NStyle.Transition.Smooth.Button.Background(this, Container.Colors.GLOW, 250);
+                    }
+                    else
+                    {
+                        NDC.NStyle.Transition.Smooth.Button.Foreground(this, Container.Colors.GLOW, 250);
+                        NDC.NStyle.Transition.Smooth.Button.BorderBrush(this, Container.Colors.GLOW, 250);
+                        NDC.NStyle.Transition.Smooth.Button.Background(this, Container.Colors.GLOW, 250);
+                    }
                 }
                 else
                 {
@@ -144,9 +154,18 @@ namespace NDC.NStyle.Controls
                 BOR_UNHOVER();
                 if (isPlayerSpecific)
                 {
-                    NDC.NStyle.Transition.Smooth.Button.Foreground(this, Container.Colors.MAIN, 250);
-                    NDC.NStyle.Transition.Smooth.Button.BorderBrush(this, Container.Colors.MAIN, 250);
-                    NDC.NStyle.Transition.Smooth.Button.Background(this, Container.Colors.MAIN, 250);
+                    if (!isActive)
+                    {
+                        NDC.NStyle.Transition.Smooth.Button.Foreground(this, Container.Colors.MAIN, 250);
+                        NDC.NStyle.Transition.Smooth.Button.BorderBrush(this, Container.Colors.MAIN, 250);
+                        NDC.NStyle.Transition.Smooth.Button.Background(this, Container.Colors.MAIN, 250);
+                    }
+                    else
+                    {
+                        NDC.NStyle.Transition.Smooth.Button.Foreground(this, Container.Colors.GLOW, 250);
+                        NDC.NStyle.Transition.Smooth.Button.BorderBrush(this, Container.Colors.GLOW, 250);
+                        NDC.NStyle.Transition.Smooth.Button.Background(this, Container.Colors.GLOW, 250);
+                    }
                 }
                 else
                 {
@@ -162,9 +181,18 @@ namespace NDC.NStyle.Controls
             {
                 if (isPlayerSpecific)
                 {
-                    NDC.NStyle.Transition.Smooth.Button.Foreground(this, Container.Colors.MAIN, 250);
-                    NDC.NStyle.Transition.Smooth.Button.BorderBrush(this, Container.Colors.MAIN, 250);
-                    NDC.NStyle.Transition.Smooth.Button.Background(this, Container.Colors.MAIN, 250);
+                    if (!isActive)
+                    {
+                        NDC.NStyle.Transition.Smooth.Button.Foreground(this, Container.Colors.MAIN, 250);
+                        NDC.NStyle.Transition.Smooth.Button.BorderBrush(this, Container.Colors.MAIN, 250);
+                        NDC.NStyle.Transition.Smooth.Button.Background(this, Container.Colors.MAIN, 250);
+                    }
+                    else
+                    {
+                        NDC.NStyle.Transition.Smooth.Button.Foreground(this, Container.Colors.GLOW, 250);
+                        NDC.NStyle.Transition.Smooth.Button.BorderBrush(this, Container.Colors.GLOW, 250);
+                        NDC.NStyle.Transition.Smooth.Button.Background(this, Container.Colors.GLOW, 250);
+                    }
                 }
                 else
                 {
