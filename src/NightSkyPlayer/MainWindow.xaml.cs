@@ -76,8 +76,7 @@ namespace NightSkyPlayer
             InitializeControls();
             InitializeEvents();
 
-            me_backgr.Source = new Uri("Backgrounds\\1.mp4", UriKind.Relative);
-            me_backgr.Play();
+
 
             btn_pause.IsEnabled = false;
             btn_pause.Visibility = Visibility.Hidden;
@@ -130,9 +129,6 @@ namespace NightSkyPlayer
             btn_volDown.isPlayerSpecific = true;
             btn_volUp.isPlayerSpecific = true;
 
-            // THEME UPDATE
-            NDC.NStyle.Container.Colors.NightSky();
-
             // LISTBOX UPDATE
             lb_tracks.Update();
             lb_playlists.Update();
@@ -158,17 +154,19 @@ namespace NightSkyPlayer
             lbl_track_album.Update();
             lbl_track_year.Update();
             lbl_track_no.Update();
+            
 
             // CONST LABEL UPDATE
             lbl_playlist_name_cur.Override = true;
             lbl_const_name.Override = true;
 
-            lbl_playlist_name_cur.Foreground = new SolidColorBrush(NDC.NStyle.Container.Colors.NIGHTSKY_GLOW);
-            lbl_const_name.Foreground = new SolidColorBrush(NDC.NStyle.Container.Colors.NIGHTSKY_GLOW);
+
+            lbl_playlist_name_cur.Foreground = new SolidColorBrush(NDC.NStyle.Container.Colors.NIGHTSKY_CONST);
+            lbl_const_name.Foreground = new SolidColorBrush(NDC.NStyle.Container.Colors.NIGHTSKY_CONST);
 
             // PROGRESS BAR UPDATE
             prgbar_progress.Update();
-
+            
 
         }
         public void InitializeEvents()
@@ -203,10 +201,31 @@ namespace NightSkyPlayer
             MouseDoubleClick += MainWindow_Maximizer;
             MouseDown += MainWindow_DragMove;
             MouseUp += MainWindow_MouseUp;
-        }    
+        }
         #endregion
         #region Helper Functions
-        public void LoadSettings()
+        public void GrabInput(string x)
+        {
+            int index = 0;
+            if (!string.IsNullOrEmpty(x))
+            {
+                foreach (ListBoxItem item in lb_playlists.Items)
+                {
+                    if ((string)item.Content == x)
+                    {
+                        UpdateTracks();
+                        continue;
+                    }
+                }
+                index = lb_playlists.Add(x);
+            }
+
+            (lb_playlists.Items[index - 1] as NDC.NStyle.Controls.NSListBoxItem).PreviewMouseDown += Playlist_ListBoxMouseDown;
+
+            currentPlayList = new PlayList(x);
+            UpdateTracks();
+        }
+        private void LoadSettings()
         {
             string[] settings = File.ReadAllLines("settings.nss");
             string[] splitStr = new string[1];
@@ -233,32 +252,61 @@ namespace NightSkyPlayer
                     case 4:
                         fullScreen = bool.Parse(clean);
                         break;
+                    case 5:
+                        int theme = int.Parse(clean);
+
+                        if(theme == -1)
+                        {
+                            theme = new Random().Next(1, 5);    
+                        }
+                        LoadTheme(theme);
+
+                        break;
                     default:
                         break;
                 }
                 iterator++;
             }
         }
-        public void GrabInput(string x)
+
+        int backGroundLoopTime;
+        private void LoadTheme(int themeNumber)
         {
-            int index = 0;
-            if (!string.IsNullOrEmpty(x))
+            if (themeNumber == 1)
             {
-                foreach (ListBoxItem item in lb_playlists.Items)
-                {
-                    if ((string)item.Content == x)
-                    {
-                        UpdateTracks();
-                        continue;
-                    }
-                }
-                index = lb_playlists.Add(x);
+                // BLUE
+                backGroundLoopTime = 10000;
+                NDC.NStyle.Container.Colors.BLUE_NightSky();
+                me_backgr.Source = new Uri("Backgrounds\\1.mp4", UriKind.Relative);
+                me_backgr.Play();
             }
+            else if (themeNumber == 2)
+            {
+                // PURPLE-ISH
+                backGroundLoopTime = 29000;
+                NDC.NStyle.Container.Colors.PURPLEISH_NightSky();
+                me_backgr.Source = new Uri("Backgrounds\\2.mp4", UriKind.Relative);
+                me_backgr.Play();
 
-            (lb_playlists.Items[index - 1] as NDC.NStyle.Controls.NSListBoxItem).PreviewMouseDown += Playlist_ListBoxMouseDown;
+            }
+            else if (themeNumber == 3)
+            {
+                // ORANGE
+                backGroundLoopTime = 29000;
+                NDC.NStyle.Container.Colors.ORANGE_NightSky();
+                me_backgr.Source = new Uri("Backgrounds\\3.mp4", UriKind.Relative);
+                me_backgr.Play();
 
-            currentPlayList = new PlayList(x);
-            UpdateTracks();
+            }
+            else if (themeNumber == 4)
+            {
+                // BLUE
+                backGroundLoopTime = 29000;
+                NDC.NStyle.Container.Colors.BLUE_NightSky();
+                me_backgr.Source = new Uri("Backgrounds\\4.mp4", UriKind.Relative);
+                me_backgr.Play();
+            }
+            InitializeControls();
         }
         private void UpdateTracks()
         {
@@ -434,7 +482,8 @@ namespace NightSkyPlayer
         }
         private void BackgroundTimer_WorkerInterval(object sender, NDC.NDynamics.Arguments.AsyncWorkerArgs e)
         {
-            if (me_backgr.Position.TotalMilliseconds >= 20000)
+
+            if (me_backgr.Position.TotalMilliseconds >= backGroundLoopTime)
             {
                 me_backgr.Stop();
                 me_backgr.Position = TimeSpan.FromMilliseconds(10);
