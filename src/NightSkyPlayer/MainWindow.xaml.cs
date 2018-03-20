@@ -20,7 +20,7 @@ namespace NightSkyPlayer
         private NDC.NDynamics.Core.AsyncWorker BackgroundTimer = new NDC.NDynamics.Core.AsyncWorker(1);
         private NDC.NDynamics.Core.AsyncWorker VolumeTimer = new NDC.NDynamics.Core.AsyncWorker(10);
 
-        public bool canTakeInput { get; set; } = true;
+        public bool CanTakeInput { get; set; } = true;
         private bool isPlaying = false;
 
         private bool isDragMoveEnabled = false;
@@ -41,10 +41,12 @@ namespace NightSkyPlayer
         /// 3 = nothing
         /// 4 = first show
         private int opacityCmd = 4;
+        private int backGroundLoopTime;
+        private int themeNo;
 
         private WindowState nextState;
 
-        PlayList currentPlayList = new PlayList("default");
+        PlayList currentPlayList = new PlayList("Default");
         #endregion
         #region Ctor
         public MainWindow()
@@ -71,12 +73,10 @@ namespace NightSkyPlayer
             lbl_track_album.Content = string.Empty;
             lbl_track_no.Content = string.Empty;
 
-            lbl_playlist_name_cur.Content = string.Empty;
+            lbl_playlist_name_cur.Content = "Default";
 
             InitializeControls();
             InitializeEvents();
-
-
 
             btn_pause.IsEnabled = false;
             btn_pause.Visibility = Visibility.Hidden;
@@ -86,8 +86,8 @@ namespace NightSkyPlayer
             if (!Directory.Exists("Playlists"))
             { Directory.CreateDirectory("Playlists"); }
 
-            if (!File.Exists("Playlists\\default.NSP"))
-            { GrabInput("default"); }
+            if (!File.Exists("Playlists\\Default.NSP"))
+            { GrabInput("Default"); }
 
             lb_tracks.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
             lb_playlists.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
@@ -100,9 +100,9 @@ namespace NightSkyPlayer
             {
                 GrabInput(Path.GetFileName(item).Split(splistStr, StringSplitOptions.RemoveEmptyEntries)[0]);
             }
-            currentPlayList.FileName = ("default");
+            currentPlayList.FileName = ("Default");
             currentPlayList.Load();
-            lb_playlists.SelectedIndex = lb_playlists.Items.IndexOf("default");
+            lb_playlists.SelectedIndex = lb_playlists.Items.IndexOf("Default");
             UpdateTracks();
 
             if (autoPlay)
@@ -166,8 +166,6 @@ namespace NightSkyPlayer
 
             // PROGRESS BAR UPDATE
             prgbar_progress.Update();
-            
-
         }
         public void InitializeEvents()
         {
@@ -268,17 +266,15 @@ namespace NightSkyPlayer
                 iterator++;
             }
         }
-
-        int backGroundLoopTime;
         private void LoadTheme(int themeNumber)
         {
+            themeNo = themeNumber;
             if (themeNumber == 1)
             {
                 // BLUE
                 backGroundLoopTime = 10000;
                 NDC.NStyle.Container.Colors.BLUE_NightSky();
                 me_backgr.Source = new Uri("Backgrounds\\1.mp4", UriKind.Relative);
-                me_backgr.Play();
             }
             else if (themeNumber == 2)
             {
@@ -286,8 +282,6 @@ namespace NightSkyPlayer
                 backGroundLoopTime = 29000;
                 NDC.NStyle.Container.Colors.PURPLEISH_NightSky();
                 me_backgr.Source = new Uri("Backgrounds\\2.mp4", UriKind.Relative);
-                me_backgr.Play();
-
             }
             else if (themeNumber == 3)
             {
@@ -295,8 +289,6 @@ namespace NightSkyPlayer
                 backGroundLoopTime = 29000;
                 NDC.NStyle.Container.Colors.ORANGE_NightSky();
                 me_backgr.Source = new Uri("Backgrounds\\3.mp4", UriKind.Relative);
-                me_backgr.Play();
-
             }
             else if (themeNumber == 4)
             {
@@ -304,8 +296,9 @@ namespace NightSkyPlayer
                 backGroundLoopTime = 29000;
                 NDC.NStyle.Container.Colors.BLUE_NightSky();
                 me_backgr.Source = new Uri("Backgrounds\\4.mp4", UriKind.Relative);
-                me_backgr.Play();
             }
+
+            me_backgr.Play();
             InitializeControls();
         }
         private void UpdateTracks()
@@ -324,7 +317,6 @@ namespace NightSkyPlayer
         private void LoadMp3File(string file)
         {
             me_player.Source = new Uri(currentPlayList.Values[file]);
-            me_player.Position = TimeSpan.FromMilliseconds(0);
             me_player.Play();
 
             // ID3 Tag Loader
@@ -336,40 +328,57 @@ namespace NightSkyPlayer
                 {
                     lbl_track_artist.Content = "Artist: " + id3Tags.Artist;
                 }
-                catch { }
+                catch
+                {
+                    lbl_track_artist.Content = "Artist: " + " N/A";
+                }
                 try
                 {
                     lbl_track_title.Content = "Title: " + id3Tags.Title;
                 }
-                catch { }
+                catch
+                {
+                    lbl_track_title.Content = "Title: " + " N/A";
+                }
                 try
                 {
                     lbl_track_year.Content = "Year: " + id3Tags.Year;
                 }
-                catch { }
+                catch
+                {
+                    lbl_track_year.Content = "Year: " + " N/A";
+                }
                 try
                 {
                     lbl_track_album.Content = "Album: " + id3Tags.Album;
                 }
-                catch { }
+                catch
+                {
+                    lbl_track_album.Content = "Album: " + " N/A";
+                }
                 try
                 {
                     lbl_track_no.Content = "Track Number: " + id3Tags.Track;
                 }
-                catch { }
+                catch
+                {
+                    lbl_track_no.Content = "Track Number: " + " N/A";
+                }
                 try
                 {
-                    BitmapImage bi = new BitmapImage();
-                    bi.BeginInit();
-
-                    MemoryStream ms = new MemoryStream();
-                    id3Tags.Picture.Save(ms, ImageFormat.Bmp);
-
-                    ms.Seek(0, SeekOrigin.Begin);
-                    bi.StreamSource = ms;
-                    bi.EndInit();
-
-                    img_songImg.Source = bi;
+                    //// IMAGE lookup is no longer used
+                    //
+                    //BitmapImage bi = new BitmapImage();
+                    //bi.BeginInit();
+                    //
+                    //MemoryStream ms = new MemoryStream();
+                    //id3Tags.Picture.Save(ms, ImageFormat.Bmp);
+                    //
+                    //ms.Seek(0, SeekOrigin.Begin);
+                    //bi.StreamSource = ms;
+                    //bi.EndInit();
+                    //
+                    //img_songImg.Source = bi;
                 }
                 catch { }
             }
@@ -477,18 +486,23 @@ namespace NightSkyPlayer
                 if (prgbar_progress.Opacity < 0)
                 {
                     prgbar_progress.Opacity = 0;
+                    prgbar_progress.Visibility = Visibility.Hidden;
                 }
             }
         }
         private void BackgroundTimer_WorkerInterval(object sender, NDC.NDynamics.Arguments.AsyncWorkerArgs e)
         {
 
-            if (me_backgr.Position.TotalMilliseconds >= backGroundLoopTime)
+            if (me_backgr.Position.TotalMilliseconds >= (backGroundLoopTime - 10))
             {
-                me_backgr.Stop();
-                me_backgr.Position = TimeSpan.FromMilliseconds(10);
-                me_backgr.Play();
+                me_backgr.Source = new Uri("Backgrounds\\" + themeNo.ToString() +".mp4", UriKind.Relative);
             }
+
+            // Simply not to overflow anything
+            ProgressWorker.intervalCount = 0;
+            OpacityWorker.intervalCount = 0;
+            BackgroundTimer.intervalCount = 0;
+            VolumeTimer.intervalCount = 0;
         }
         private void OpacityWorker_WorkerInterval(object sender, NDC.NDynamics.Arguments.AsyncWorkerArgs e)
         {
@@ -644,9 +658,9 @@ namespace NightSkyPlayer
         #region Button Events
         private void Btn_add_Click(object sender, RoutedEventArgs e)
         {
-            if (canTakeInput)
+            if (CanTakeInput)
             {
-                canTakeInput = false;
+                CanTakeInput = false;
                 Input i = new Input(this);
                 i.Show();
             }
@@ -765,6 +779,8 @@ namespace NightSkyPlayer
                 me_player.Volume = 1;
             }
             ShowVolume((uint)(me_player.Volume * 100));
+            prgbar_progress.Visibility = Visibility.Visible;
+
         }
         private void Btn_volDown_Click(object sender, RoutedEventArgs e)
         {
@@ -774,6 +790,8 @@ namespace NightSkyPlayer
                 me_player.Volume = 0;
             }
             ShowVolume((uint)(me_player.Volume * 100));
+            prgbar_progress.Visibility = Visibility.Visible;
+
         }
 
         #endregion
