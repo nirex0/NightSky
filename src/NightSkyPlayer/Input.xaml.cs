@@ -40,7 +40,7 @@ namespace NightSkyPlayer
             tb_name.Update();
             lbl_const_name.Update();
 
-            lbl_const_name.Foreground = new SolidColorBrush(NDC.NStyle.Container.Colors.NIGHTSKY_GLOW);
+            lbl_const_name.Foreground = new SolidColorBrush(NDC.NStyle.Container.Colors.BLUE_NIGHTSKY_GLOW);
 
         }
         #endregion
