@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;
+using System.Windows.Interop;
 #endregion
 
 namespace NightSkyPlayer
@@ -199,6 +200,7 @@ namespace NightSkyPlayer
             MouseDoubleClick += MainWindow_Maximizer;
             MouseDown += MainWindow_DragMove;
             MouseUp += MainWindow_MouseUp;
+            SourceInitialized += MainWindow_SourceInitialized;
         }
         #endregion
         #region Helper Functions
@@ -554,6 +556,12 @@ namespace NightSkyPlayer
         }
         #endregion
         #region Window Events
+        private void MainWindow_SourceInitialized(object sender, EventArgs e)
+        {
+            HwndSource hwndSource = PresentationSource.FromVisual(this) as HwndSource;
+            HwndTarget hwndTarget = hwndSource.CompositionTarget;
+            hwndTarget.RenderMode = RenderMode.SoftwareOnly;
+        }
         private void MainWindow_Maximizer(object sender, MouseButtonEventArgs e)
         {
             double y = Mouse.GetPosition(Application.Current.MainWindow).Y;
