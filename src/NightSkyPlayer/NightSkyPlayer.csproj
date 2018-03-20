@@ -140,9 +140,6 @@
     <Resource Include="Resources\res-icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\res-repeat.png" />
     <Resource Include="Resources\res-shuffle.png" />
     <Resource Include="Resources\res-voldown.png" />
