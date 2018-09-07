@@ -52,7 +52,7 @@ CURRENT KNOWN BUGS
 CONTACT
 =======
 
-Nirex.0[AT]Gmail[DOT]Com
+Nirex.0@gmail.com
 
 COPYRIGHT INFO
 ==============
