@@ -257,7 +257,7 @@ namespace NightSkyPlayer
 
                         if(theme == -1)
                         {
-                            theme = new Random().Next(1, 5);    
+                            theme = new Random().Next(2, 5);    
                         }
                         LoadTheme(theme);
 
@@ -270,6 +270,7 @@ namespace NightSkyPlayer
         }
         private void LoadTheme(int themeNumber)
         {
+            // This theme is disabled
             themeNo = themeNumber;
             if (themeNumber == 1)
             {
@@ -603,7 +604,7 @@ namespace NightSkyPlayer
             string cleanString = string.Empty;
             foreach (var item in FileList)
             {
-                if (item.ToLower().Contains(".mp3"))
+                if (item.ToLower().Contains(".mp3") || item.ToLower().Contains(".flac"))
                 {
                     cleanString += item + "\n";
                 }
