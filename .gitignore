@@ -6,3 +6,5 @@ src/.vs/NightSkyPlayer/v15/.suo
 *.ide-shm
 *.cache
 *.baml
+*.pdb
+*.config
