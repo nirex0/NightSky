@@ -1,0 +1,8 @@
+
+src/.vs/NightSkyPlayer/v15/.suo
+*.lock
+*.ide
+*.ide-wal
+*.ide-shm
+*.cache
+*.baml
