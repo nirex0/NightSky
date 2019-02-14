@@ -8,3 +8,7 @@ src/.vs/NightSkyPlayer/v15/.suo
 *.baml
 *.pdb
 *.config
+*.CopyComplete
+*.txt
+*.resources
+*.lref
