@@ -2,7 +2,7 @@
 
 A beautiful player made with C# WPF (And a touch of NDC)
 
-![NightSky Player Demo](https://yt-embed.herokuapp.com/embed?v=MgJyU03_2bU)
+[![NightSky Demo](https://yt-embed.herokuapp.com/embed?v=MgJyU03_2bU)](https://www.youtube.com/watch?v=MgJyU03_2bU "NightSky Demo")
 
 CHANGELOG
 =========
